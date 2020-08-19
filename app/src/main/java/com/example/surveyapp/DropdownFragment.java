@@ -85,7 +85,11 @@ public class DropdownFragment extends Fragment {
                     selected = (String)spinnerDropdown.getSelectedItem();
                     Toast.makeText(getContext(), "Answer : "+selected, Toast.LENGTH_SHORT).show();
                     SurveyActivity surveyActivity = (SurveyActivity) getActivity();
-                    surveyActivity.showNextQuestion();
+                    if (surveyActivity != null) {
+                        surveyActivity.showNextQuestion();
+                        surveyActivity.survey_name.add(question.getType());
+                        surveyActivity.survey_results.add(selected);
+                    }
                 } else  {
                     Toast.makeText(getContext(), "You have to select first.", Toast.LENGTH_SHORT).show();
                 }

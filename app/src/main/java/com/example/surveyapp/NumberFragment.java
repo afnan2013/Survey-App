@@ -54,8 +54,13 @@ public class NumberFragment extends Fragment {
                     Toast.makeText(getContext(), "You have to enter your number first.", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getContext(), "Number :"+number, Toast.LENGTH_SHORT).show();
+
                     SurveyActivity surveyActivity = (SurveyActivity) getActivity();
-                    surveyActivity.showNextQuestion();
+                    if (surveyActivity != null) {
+                        surveyActivity.survey_name.add(question.getType());
+                        surveyActivity.survey_results.add(number);
+                        surveyActivity.showNextQuestion();
+                    }
                 }
             }
         });

@@ -81,12 +81,26 @@ public class MultipleChoiceFragment extends Fragment {
         btnContinueNextMultiple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (rbGroup.getCheckedRadioButtonId() != -1) {
-                    RadioButton selectedButton = (RadioButton)view.findViewById(rbGroup.getCheckedRadioButtonId());
-                    int i = rbGroup.indexOfChild(selectedButton);
-                    Toast.makeText(getContext(), rb1.getText(), Toast.LENGTH_SHORT).show();
+                String choice = null;
+                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked() || rb5.isChecked()) {
+                    if (rb1.isChecked())
+                        choice = rb1.getText().toString();
+                    else if (rb2.isChecked())
+                        choice = rb2.getText().toString();
+                    else if (rb3.isChecked())
+                        choice = rb3.getText().toString();
+                    else if (rb4.isChecked())
+                        choice = rb4.getText().toString();
+                    else if (rb5.isChecked())
+                        choice = rb5.getText().toString();
+
+                    Toast.makeText(getContext(), choice, Toast.LENGTH_SHORT).show();
                     SurveyActivity surveyActivity = (SurveyActivity) getActivity();
-                    surveyActivity.showNextQuestion();
+                    if (surveyActivity != null) {
+                        surveyActivity.showNextQuestion();
+                        surveyActivity.survey_name.add(question.getType());
+                        surveyActivity.survey_results.add(choice);
+                    }
                 } else {
                     Toast.makeText(getContext(), "Please select an answer", Toast.LENGTH_SHORT).show();
                 }

@@ -62,7 +62,11 @@ public class TextFragment extends Fragment {
                 }else{
                     Toast.makeText(getContext(), "Text :"+text, Toast.LENGTH_SHORT).show();
                     SurveyActivity surveyActivity = (SurveyActivity) getActivity();
-                    surveyActivity.showNextQuestion();
+                    if (surveyActivity != null) {
+                        surveyActivity.survey_name.add(question.getType());
+                        surveyActivity.survey_results.add(text);
+                        surveyActivity.showNextQuestion();
+                    }
                 }
             }
         });

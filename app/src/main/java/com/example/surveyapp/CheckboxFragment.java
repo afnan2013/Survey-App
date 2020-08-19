@@ -50,13 +50,22 @@ public class CheckboxFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (checkBoxYes.isChecked() || checkBoxNo.isChecked()){
-                    if (checkBoxYes.isChecked()){
-                        Toast.makeText(getContext(), "Yes", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getContext(), "No", Toast.LENGTH_SHORT).show();
-                    }
                     SurveyActivity surveyActivity = (SurveyActivity) getActivity();
-                    surveyActivity.showNextQuestion();
+                    if (surveyActivity != null) {
+                        surveyActivity.survey_name.add(question.getType());
+                        if (checkBoxYes.isChecked()){
+                            surveyActivity.survey_results.add("Yes");
+                            Toast.makeText(getContext(), "Yes", Toast.LENGTH_SHORT).show();
+                        }else{
+                            surveyActivity.survey_results.add("No");
+                            Toast.makeText(getContext(), "No", Toast.LENGTH_SHORT).show();
+                        }
+                        surveyActivity.showNextQuestion();
+                    }
+
+
+
+
                 }else{
                     Toast.makeText(getContext(), "Please select an answer", Toast.LENGTH_SHORT).show();
                 }

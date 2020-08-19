@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,11 +27,15 @@ public class SurveyActivity extends AppCompatActivity {
     private int questionCountTotal;
     private Question currentQuestion;
 
+    public ArrayList<String> survey_name, survey_results = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
+        survey_name = new ArrayList<>();
+        survey_results = new ArrayList<>();
         //btnContinueNext = findViewById(R.id.btn_continue_next_Text);
 
         Bundle bundle =  getIntent().getExtras();
@@ -77,7 +83,13 @@ public class SurveyActivity extends AppCompatActivity {
             }
 
         } else {
-            finishQuiz();
+            for (int i=0; i< survey_name.size();i++){
+                Log.d(TAG, "showNextQuestion: Finally The Survey Results Name ="+ survey_name.get(i)+" and Value="+survey_results.get(i));
+                Toast.makeText(this, "Finally The Survey Results Name ="+ survey_name.get(i)+" and Value="+survey_results.get(i), Toast.LENGTH_SHORT).show();
+            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            //finishQuiz();
         }
     }
 
