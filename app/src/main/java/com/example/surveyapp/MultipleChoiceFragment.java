@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +35,7 @@ public class MultipleChoiceFragment extends Fragment {
     private RadioButton rb3;
     private RadioButton rb4;
     private RadioButton rb5;
+    Button btnContinueNextMultiple;
 
     private Question question;
     public MultipleChoiceFragment() {
@@ -46,13 +49,7 @@ public class MultipleChoiceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_multiple_choice, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view =  inflater.inflate(R.layout.fragment_multiple_choice, container, false);
 
         textViewQuestionMC = view.findViewById(R.id.text_view_question_multiple_choice);
         rbGroup = view.findViewById(R.id.radio_group);
@@ -61,6 +58,7 @@ public class MultipleChoiceFragment extends Fragment {
         rb3 = view.findViewById(R.id.radio_button3);
         rb4 = view.findViewById(R.id.radio_button4);
         rb5 = view.findViewById(R.id.radio_button5);
+        btnContinueNextMultiple = view.findViewById(R.id.btn_continue_next_multiple);
 
         Log.d(TAG, "onViewCreated: "+question.getTitle()+" "+question.getOptions()+"  "+question.getType());
         textViewQuestionMC.setText(question.getTitle().toString());
@@ -77,5 +75,22 @@ public class MultipleChoiceFragment extends Fragment {
             Log.d(TAG, "onViewCreated: Some options are missing in Multiple Choice Question");
         }
 
+        btnContinueNextMultiple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked() || rb5.isChecked()) {
+                    RadioButton selectedButton = view.findViewById(rbGroup.getCheckedRadioButtonId());
+                    Toast.makeText(getContext(), selectedButton.getText(), Toast.LENGTH_SHORT).show();
+                    SurveyActivity surveyActivity = (SurveyActivity) getActivity();
+                    surveyActivity.showNextQuestion();
+                } else {
+                    Toast.makeText(getContext(), "Please select an answer", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return view;
     }
+
+
 }

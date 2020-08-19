@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,28 +31,29 @@ public class DropdownFragment extends Fragment {
 
     TextView textViewQuestionD;
     Spinner spinnerDropdown;
+    Button btnContinueNextDropdown;
 
     private Question question;
 
-    public DropdownFragment(){}
 
+
+    public DropdownFragment(){}
     public DropdownFragment(Question question){
         this.question = question;
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dropdown, container, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_dropdown, container, false);
 
         textViewQuestionD = view.findViewById(R.id.text_View_question_dropdown);
         spinnerDropdown = view.findViewById(R.id.spinner_dropdown);
+        btnContinueNextDropdown = view.findViewById(R.id.btn_continue_next_dropdown);
+
 
         Log.d(TAG, "onViewCreated: "+question.getTitle()+" "+question.getOptions()+"  "+question.getType());
         textViewQuestionD.setText(question.getTitle().toString());
@@ -74,6 +77,23 @@ public class DropdownFragment extends Fragment {
             }
         });
 
-        
+        btnContinueNextDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selected= null;
+                if (spinnerDropdown != null && spinnerDropdown.getSelectedItem() !=null ) {
+                    selected = (String)spinnerDropdown.getSelectedItem();
+                    Toast.makeText(getContext(), "Answer : "+selected, Toast.LENGTH_SHORT).show();
+                    SurveyActivity surveyActivity = (SurveyActivity) getActivity();
+                    surveyActivity.showNextQuestion();
+                } else  {
+                    Toast.makeText(getContext(), "You have to select first.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return view;
     }
+
+
 }

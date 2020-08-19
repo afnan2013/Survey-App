@@ -30,7 +30,7 @@ public class SurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
-        btnContinueNext = findViewById(R.id.btn_continue_next);
+        //btnContinueNext = findViewById(R.id.btn_continue_next_Text);
 
         Bundle bundle =  getIntent().getExtras();
         if (bundle != null) {
@@ -44,16 +44,9 @@ public class SurveyActivity extends AppCompatActivity {
             }
         }
 
-        btnContinueNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNextQuestion();
-            }
-        });
-
     }
 
-    private void showNextQuestion() {
+    public void showNextQuestion() {
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
             String questionType= currentQuestion.getType();
