@@ -53,11 +53,14 @@ public class MultipleChoiceFragment extends Fragment {
 
         textViewQuestionMC = view.findViewById(R.id.text_view_question_multiple_choice);
         rbGroup = view.findViewById(R.id.radio_group);
+
         rb1 = view.findViewById(R.id.radio_button1);
         rb2 = view.findViewById(R.id.radio_button2);
         rb3 = view.findViewById(R.id.radio_button3);
         rb4 = view.findViewById(R.id.radio_button4);
         rb5 = view.findViewById(R.id.radio_button5);
+        rbGroup.clearCheck();
+
         btnContinueNextMultiple = view.findViewById(R.id.btn_continue_next_multiple);
 
         Log.d(TAG, "onViewCreated: "+question.getTitle()+" "+question.getOptions()+"  "+question.getType());
@@ -78,9 +81,10 @@ public class MultipleChoiceFragment extends Fragment {
         btnContinueNextMultiple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked() || rb5.isChecked()) {
-                    RadioButton selectedButton = view.findViewById(rbGroup.getCheckedRadioButtonId());
-                    Toast.makeText(getContext(), selectedButton.getText(), Toast.LENGTH_SHORT).show();
+                if (rbGroup.getCheckedRadioButtonId() != -1) {
+                    RadioButton selectedButton = (RadioButton)view.findViewById(rbGroup.getCheckedRadioButtonId());
+                    int i = rbGroup.indexOfChild(selectedButton);
+                    Toast.makeText(getContext(), rb1.getText(), Toast.LENGTH_SHORT).show();
                     SurveyActivity surveyActivity = (SurveyActivity) getActivity();
                     surveyActivity.showNextQuestion();
                 } else {
