@@ -13,15 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="220dp"
         android:layout_marginEnd="20dp"
         android:text="@string/hello_blank_fragment"
         app:layout_constraintBottom_toTopOf="@+id/editText_text_answer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <EditText
         android:id="@+id/editText_text_answer"
@@ -29,13 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="276dp"
+        android:layout_marginBottom="284dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Please Answer"
         app:layout_constraintBottom_toTopOf="@+id/btn_continue_next_Text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
