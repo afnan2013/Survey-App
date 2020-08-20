@@ -22,7 +22,7 @@ public class SurveyActivity extends AppCompatActivity {
     TextView textView;
     Button btnContinueNext;
 
-    private List<Question> questionList;
+    private ArrayList<Question> questionList;
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
@@ -42,6 +42,10 @@ public class SurveyActivity extends AppCompatActivity {
         if (bundle != null) {
             questionList = (ArrayList<Question>)bundle.getSerializable("QuestionList");
             if (questionList != null) {
+
+                SurveyDbHelper surveyDbHelper = new SurveyDbHelper(this);
+                surveyDbHelper.fillQuestionsTable(questionList);
+
                 questionCounter = 0;
                 questionCountTotal = questionList.size();
                 Collections.shuffle(questionList);

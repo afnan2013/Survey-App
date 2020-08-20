@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String URL = "https://example-response.herokuapp.com/getSurvey";
 
     RequestQueue requestQueue;
-    private List<Question> questionList = null;
+    private ArrayList<Question> questionList = null;
 
     Button btnTakeSurvey;
 
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         }
+
                         Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("QuestionList", (Serializable) questionList); //where questionList is object of  ArrayList<Question>
