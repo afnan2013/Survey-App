@@ -50,6 +50,8 @@ public class SurveyActivity extends AppCompatActivity {
                 questionCountTotal = questionList.size();
                 Collections.shuffle(questionList);
 
+                //questionList = surveyDbHelper.getAllQuestions();
+                Log.d(TAG, "onCreate: After Insertion Checking if data insertion is okay? +"+questionList);
                 showNextQuestion();
             }
         }

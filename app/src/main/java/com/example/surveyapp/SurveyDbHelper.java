@@ -35,7 +35,7 @@ public class SurveyDbHelper extends SQLiteOpenHelper {
                 SurveysTable.COLUMN_QUESTION + " TEXT, " +
                 SurveysTable.COLUMN_TYPE + " TEXT, " +
                 SurveysTable.COLUMN_OPTIONS + " TEXT, " +
-                SurveysTable.COLUMN_REQUIRED + " BOOLEAN " +
+                SurveysTable.COLUMN_REQUIRED + " TEXT " +
                 ")";
 
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
@@ -54,7 +54,7 @@ public class SurveyDbHelper extends SQLiteOpenHelper {
     }
     private void addQuestion(Question question) {
 
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(SurveysTable.COLUMN_QUESTION, question.getTitle());
         cv.put(SurveysTable.COLUMN_TYPE, question.getType());
@@ -62,14 +62,14 @@ public class SurveyDbHelper extends SQLiteOpenHelper {
         cv.put(SurveysTable.COLUMN_REQUIRED, question.isRequired());
 
         Log.d(TAG, "addQuestion: "+cv);
-        sqLiteDatabase.insert(SurveysTable.TABLE_NAME, null, cv);
+        db.insert(SurveysTable.TABLE_NAME, null, cv);
     }
 
-    public List<Question> getAllQuestions() {
-        List<Question> questionList = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+    public ArrayList<Question> getAllQuestions() {
+        ArrayList<Question> questionList = new ArrayList<>();
+        db = this.getReadableDatabase();
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM " + SurveysTable.TABLE_NAME, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + SurveysTable.TABLE_NAME, null);
         if (c.moveToFirst()) {
             do {
                 Question question = new Question();
